@@ -1,5 +1,5 @@
-<!-- latest jquery-->
-<script src="/backend/assets/js/jquery.min.js"></script>
+    <!-- latest jquery-->
+    <script src="/backend/assets/js/jquery.min.js"></script>
     <!-- Bootstrap js-->
     <script src="/backend/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
     <!-- feather icon js-->
@@ -16,20 +16,11 @@
     <script src="/backend/assets/js/slick/slick.min.js"></script>
     <script src="/backend/assets/js/slick/slick.js"></script>
     <script src="/backend/assets/js/header-slick.js"></script>
-    <script src="/backend/assets/js/chart/apex-chart/apex-chart.js"></script>
-    <script src="/backend/assets/js/chart/apex-chart/stock-prices.js"></script>
-    <script src="/backend/assets/js/chart/apex-chart/moment.min.js"></script>
-    <script src="/backend/assets/js/chart/echart/esl.js"></script>
-    <script src="/backend/assets/js/chart/echart/config.js"></script>
-    <script src="/backend/assets/js/chart/echart/pie-chart/facePrint.js"></script>
-    <script src="/backend/assets/js/chart/echart/pie-chart/testHelper.js"></script>
-    <script src="/backend/assets/js/chart/echart/pie-chart/custom-transition-texture.js"></script>
-    <script src="/backend/assets/js/chart/echart/data/symbols.js"></script>
     <!-- calendar js-->
-    <script src="/backend/assets/js/datepicker/date-picker/datepicker.js"></script>
-    <script src="/backend/assets/js/datepicker/date-picker/datepicker.en.js"></script>
-    <script src="/backend/assets/js/datepicker/date-picker/datepicker.custom.js"></script>
-    <script src="/backend/assets/js/dashboard/dashboard_3.js"></script>
+    <script src="/backend/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <!-- <script src="/backend/assets/js/datatable/datatables/datatable.custom.js"></script> -->
+    <script src="/backend/assets/js/sweet-alert/sweetalert.min.js"></script>
+    <script src="/backend/assets/js/sweet-alert/app.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
-    <script src="/backend/assets/js/script.js"></script> 
+    <script src="/backend/assets/js/script.js"></script>

@@ -24,7 +24,7 @@
                     <img class="mt-0" src="/backend/assets/images/hand.gif" alt="hand-gif">
                 </div>
             </div>
-            <div class="welcome-content d-xl-block d-none"><span class="text-truncate col-12">Here’s what’s happening with your store today. </span></div>
+            <!-- <div class="welcome-content d-xl-block d-none"><span class="text-truncate col-12">Here’s what’s happening with your store today. </span></div> -->
         </div>
         <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
             <ul class="nav-menus">
@@ -103,9 +103,9 @@
                         </div>
                     </div>
                 </li> -->
-                <li>
+                <!-- <li>
                     <div class="mode"><i class="moon" data-feather="moon"> </i></div>
-                </li>
+                </li> -->
                 <!-- <li class="onhover-dropdown notification-down">
                     <div class="notification-box">
                         <svg>
@@ -308,7 +308,7 @@
                     <div class="media profile-media">
                         <img class="b-r-10" src="/backend/assets/images/dashboard/profile.png" alt="">
                         <div class="media-body d-xxl-block d-none box-col-none">
-                            <div class="d-flex align-items-center gap-2"> <span>{{ auth()->user()->name }} </span><i class="middle fa fa-angle-down"> </i></div>
+                            <div class="d-flex align-items-center gap-2"> <span>{{ auth()->user()->full_name }} </span><i class="middle fa fa-angle-down"> </i></div>
                             <p class="mb-0 font-roboto">Admin</p>
                         </div>
                     </div>

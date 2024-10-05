@@ -33,5 +33,6 @@
             </div>
         </div>
         @include('includes.backend.script')
+        @stack('scripts')
     </body>
 </html>
