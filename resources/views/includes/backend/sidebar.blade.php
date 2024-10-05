@@ -91,6 +91,9 @@
                     </a>
                     <ul class="sidebar-submenu">
                         <li>
+                            <a href="/admin/service-categories">Categories</a>
+                        </li>
+                        <li>
                             <a href="/admin/services">Services</a>
                         </li>
                         <li>

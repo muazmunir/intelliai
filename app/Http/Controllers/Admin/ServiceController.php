@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\ServiceInterface;
+use App\Models\ServiceCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,5 +28,15 @@ class ServiceController extends Controller
     public function dataTable(): JsonResponse
     {
         return $this->serviceRepository->getDataTable();
+    }
+
+    public function create(): View
+    {
+        $pageTitle = 'Add user';
+
+        // $roles = $this->serviceRepository->getRoles();
+        $categories = ServiceCategory::all();
+
+        return view('admin.services.form', compact('pageTitle', 'categories'));
     }
 }
