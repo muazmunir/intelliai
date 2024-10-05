@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceCategoryController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->name('frontend.')->group(function () {
@@ -51,4 +53,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified', 'user-access:admin'])->prefix('admin')->group(function () {
     Route::CustomResource('users', UserController::class);
     Route::IndexOrUpdate('setting', SettingController::class);
+    Route::CustomResource('service-categories', ServiceCategoryController::class);
+    Route::CustomResource('services', ServiceController::class);
 });
