@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Interfaces\ServiceInterface;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -17,7 +19,13 @@ class ServiceController extends Controller
 
     public function index(): View
     {
-        return view('admin.services.index');
+        $pageTitle = 'Services';
+
+        return view('admin.services.index', compact('pageTitle'));
     }
 
+    public function dataTable(): JsonResponse
+    {
+        return $this->serviceRepository->getDataTable();
+    }
 }
