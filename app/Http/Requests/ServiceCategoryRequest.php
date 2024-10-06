@@ -11,7 +11,7 @@ class ServiceCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,25 @@ class ServiceCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $categoryId = $this->route('service_category') ? $this->route('service_category')->id : null;
+
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:service_categories,slug,' . $categoryId,
+            ],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The name field is required.',
+            'slug.required' => 'The slug field is required.',
+            'slug.unique' => 'The slug must be unique. This slug is already taken.',
         ];
     }
 }
