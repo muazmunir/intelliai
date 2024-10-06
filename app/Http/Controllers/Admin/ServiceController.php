@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceRequest;
 use App\Interfaces\ServiceInterface;
 use App\Models\ServiceCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
 class ServiceController extends Controller
 {
@@ -36,5 +38,37 @@ class ServiceController extends Controller
         $categories = ServiceCategory::all();
 
         return view('admin.services.form', compact('pageTitle', 'categories'));
+    }
+
+    public function store(ServiceRequest $request): RedirectResponse
+    {
+        $this->serviceRepository->saveService($request);
+
+        return redirect()->route('services.index')->with([
+            'message' => 'Services Created Successfully',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    public function edit($id): View
+    {
+        $categories = '';
+
+        return view('admin.services.edit', compact('service', 'categories'));
+    }
+
+    public function update(ServiceRequest $request, $id): RedirectResponse
+    {
+        $this->serviceRepository->updateService($request, $id);
+
+        return redirect()->route('services.index')->with([
+            'message' => 'Service updated successfully',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    public function destroy($id): JsonResponse
+    {
+        return $this->serviceRepository->deleteService($id);
     }
 }

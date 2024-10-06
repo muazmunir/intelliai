@@ -38,4 +38,43 @@ class ServiceRepository implements ServiceInterface
             })
             ->toJson();
     }
+
+    public function saveService($request)
+    {
+        $input = $request->all();
+        $this->processIcon($request, $input);
+        $this->service->create($input);
+    }
+
+    public function updateService($request, int $id)
+    {
+        $service = $this->service->find($id);
+        $input = $request->all();
+        $this->processIcon($request, $input, $id);
+        $service->update($input);
+    }
+
+    public function deleteService(int $id)
+    {
+        $this->deleteIcon($id);
+        $this->service->find($id)->delete();
+
+        return jsonResponse(['message' => 'Service deleted successfully']);
+    }
+
+    private function processIcon($request, array &$input, $id = null)
+    {
+        if ($request->hasFile('icon')) {
+            $this->deleteIcon($id);
+            $input['icon'] = uploadImage($request->file('icon'), '400', '600', 'services');
+        }
+    }
+
+    private function deleteIcon($id)
+    {
+        $service = $this->service->find($id);
+        if ($service && $service->icon) {
+            deleteFile($service->icon, 'services');
+        }
+    }
 }
