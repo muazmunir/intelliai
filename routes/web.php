@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +23,7 @@ Route::macro('CustomResource', function ($url, $controller) {
         Route::get('/dataTable', 'dataTable')->name('.dataTable');
     });
     Route::resource($url, $controller);
-}); 
+});
 
 Route::macro('IndexOrUpdate', function ($url, $controller) {
     Route::controller($controller)->prefix($url)->name($url)->group(function () {
@@ -31,7 +31,6 @@ Route::macro('IndexOrUpdate', function ($url, $controller) {
         Route::match(['put', 'patch'], '/update', 'update')->name('.update');
     });
 });
-
 
 Route::get('/admin', function () {
     return redirect()->route('admin.dashboard');

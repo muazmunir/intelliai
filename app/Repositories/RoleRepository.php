@@ -14,8 +14,8 @@ class RoleRepository implements RoleInterface
 
     public function __construct()
     {
-        $this->role = new Role();
-        $this->user = new User();
+        $this->role = new Role;
+        $this->user = new User;
     }
 
     public function getRoles()

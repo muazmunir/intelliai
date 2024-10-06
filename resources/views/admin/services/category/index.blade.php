@@ -18,9 +18,6 @@
                         class="table table-striped table-bordered dt-responsive nowrap">
                         <thead>
                             <tr>
-                                <th>
-                                    <input type="checkbox" id="select-all-checkbox">
-                                </th>
                                 <th>{{ __('#') }}</th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Action') }}</th>

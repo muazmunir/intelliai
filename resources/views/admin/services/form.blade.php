@@ -35,12 +35,6 @@
                             <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required>
                         </div>
 
-                        <!-- Slug -->
-                        <div class="mb-3">
-                            <label for="slug" class="form-label">Slug</label>
-                            <input type="text" name="slug" id="slug" class="form-control" value="{{ old('slug') }}" required>
-                        </div>
-
                         <!-- Short Description -->
                         <div class="mb-3">
                             <label for="short_description" class="form-label">Short Description</label>

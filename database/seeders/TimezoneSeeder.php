@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 class TimezoneSeeder extends Seeder
 {
     use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      */
@@ -19,7 +20,7 @@ class TimezoneSeeder extends Seeder
         $data = [];
         foreach ($timeZones as $timeZone) {
             $dateTimeZone = new \DateTimeZone($timeZone);
-            $offset = $dateTimeZone->getOffset(new \DateTime());
+            $offset = $dateTimeZone->getOffset(new \DateTime);
 
             $data[] = [
                 'name' => $timeZone,

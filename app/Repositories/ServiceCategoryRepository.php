@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Interfaces\ServiceCategoryInterface;
 use App\Models\ServiceCategory;
 use Yajra\Datatables\Datatables;
@@ -13,7 +14,7 @@ class ServiceCategoryRepository implements ServiceCategoryInterface
 
     public function __construct()
     {
-        $this->serviceCategory = new ServiceCategory();
+        $this->serviceCategory = new ServiceCategory;
         $this->datatables = new Datatables;
     }
 
@@ -67,5 +68,4 @@ class ServiceCategoryRepository implements ServiceCategoryInterface
 
         return jsonResponse(['message' => 'service Category Deleted Successfully']);
     }
-
 }

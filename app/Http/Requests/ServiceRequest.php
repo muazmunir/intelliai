@@ -31,7 +31,7 @@ class ServiceRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:services,slug,' . $serviceId,
+                'unique:services,slug,'.$serviceId,
             ],
             'short_description' => ['required', 'string', 'max:500'],
             'long_description' => ['required', 'string'],

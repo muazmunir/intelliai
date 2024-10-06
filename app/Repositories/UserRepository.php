@@ -4,8 +4,6 @@ namespace App\Repositories;
 
 use App\Interfaces\UserInterface;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Yajra\Datatables\Datatables;
 
@@ -19,7 +17,7 @@ class UserRepository implements UserInterface
 
     public function __construct()
     {
-        $this->user = new User();
+        $this->user = new User;
         $this->datatables = new Datatables;
         $this->hash = new Hash;
     }
@@ -37,9 +35,10 @@ class UserRepository implements UserInterface
         return $this->datatables->of($query)
             ->addColumn('action', function ($user) {
                 $action = '<ul class="action">';
-                $action .= '<li class="edit"><a href="'. route('users.edit', $user->id) .'"><i class="icon-pencil-alt"></i></a></li>';
+                $action .= '<li class="edit"><a href="'.route('users.edit', $user->id).'"><i class="icon-pencil-alt"></i></a></li>';
                 $action .= '<li class="delete"><a href="#"><i class="icon-trash"></i></a></li>';
                 $action .= '</ul>';
+
                 return $action;
             })
             ->addColumn('name', function ($user) {
@@ -63,6 +62,7 @@ class UserRepository implements UserInterface
         if ($request->has('roles')) {
             $user->syncRoles($request->roles);
         }
+
         return $user;
     }
 

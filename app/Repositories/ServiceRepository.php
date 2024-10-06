@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Interfaces\ServiceInterface;
 use App\Models\Service;
 use App\Models\ServiceCategory;
-use Illuminate\Support\Facades\Gate;
 use Yajra\Datatables\Datatables;
 
 class ServiceRepository implements ServiceInterface
@@ -17,8 +17,8 @@ class ServiceRepository implements ServiceInterface
 
     public function __construct()
     {
-        $this->service = new Service();
-        $this->serviceCategory = new ServiceCategory();
+        $this->service = new Service;
+        $this->serviceCategory = new ServiceCategory;
         $this->datatables = new Datatables;
     }
 

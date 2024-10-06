@@ -28,7 +28,7 @@ class ServiceCategoryRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:service_categories,name,' . $categoryId,
+                'unique:service_categories,name,'.$categoryId,
             ],
         ];
     }

@@ -7,7 +7,6 @@ use App\Interfaces\ServiceInterface;
 use App\Models\ServiceCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -34,7 +33,6 @@ class ServiceController extends Controller
     {
         $pageTitle = 'Add user';
 
-        // $roles = $this->serviceRepository->getRoles();
         $categories = ServiceCategory::all();
 
         return view('admin.services.form', compact('pageTitle', 'categories'));
