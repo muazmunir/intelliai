@@ -24,12 +24,11 @@ class ServiceCategoryRequest extends FormRequest
         $categoryId = $this->route('service_category') ? $this->route('service_category')->id : null;
 
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => [
+            'name' => [
                 'required',
                 'string',
                 'max:255',
-                'unique:service_categories,slug,' . $categoryId,
+                'unique:service_categories,name,' . $categoryId,
             ],
         ];
     }
@@ -38,8 +37,6 @@ class ServiceCategoryRequest extends FormRequest
     {
         return [
             'name.required' => 'The name field is required.',
-            'slug.required' => 'The slug field is required.',
-            'slug.unique' => 'The slug must be unique. This slug is already taken.',
         ];
     }
 }

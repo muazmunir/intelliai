@@ -12,7 +12,6 @@ class ServiceCategory extends Model
 
     protected $fillable = [
         'name',
-        'slug',
     ];
 
     public function services(): HasMany
