@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title')->unique();
             $table->longtext('short_description')->nullable();
             $table->longtext('long_description')->nullable();
+            $table->boolean('is_featured')->default(0);
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('service_categories')->onDelete('cascade');
         });

@@ -30,20 +30,34 @@ class ServiceRepository implements ServiceInterface
             ->addColumn('category_name', function ($services) {
                 return $services->category->name;
             })
+            ->addColumn('action', function ($user) {
+                $action = '<ul class="action">';
+                $action .= '<li class="edit"><a href="'.route('services.edit', $user->id).'"><i class="icon-pencil-alt"></i></a></li>';
+                $action .= '<li class="delete"><a href="#"><i class="icon-trash"></i></a></li>';
+                $action .= '</ul>';
+
+                return $action;
+            })
             ->editColumn('id', function () {
                 static $i = 0;
                 $i++;
 
                 return $i;
             })
+            ->rawColumns(['category_name', 'action'])
             ->toJson();
     }
 
     public function saveService($request)
     {
         $input = $request->all();
-        $this->processIcon($request, $input);
+        // $this->processIcon($request, $input);
         $this->service->create($input);
+    }
+
+    public function getService($id)
+    {
+        return $this->service->find($id);
     }
 
     public function updateService($request, int $id)

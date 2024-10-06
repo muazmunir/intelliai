@@ -23,11 +23,11 @@ class ServiceCategoryRepository implements ServiceCategoryInterface
         $categories = $this->serviceCategory->select('id', 'name')->get();
 
         return $this->datatables->of($categories)
-            ->addColumn('action', function ($category) {
-                $action = '<div>';
-                $action .= '<a class="btn btn-primary edit-category-button" data-category-id="'.$category->id.'"><i class="fas fa-edit"></i></a> ';
-                $action .= '<button class="btn btn-danger" onclick="confirmDelete('.$category->id.')"><i class="fas fa-trash"></i></button>';
-                $action .= '</div>';
+            ->addColumn('action', function ($user) {
+                $action = '<ul class="action">';
+                $action .= '<li class="edit"><a href="#"><i class="icon-pencil-alt"></i></a></li>';
+                $action .= '<li class="delete"><a href="#"><i class="icon-trash"></i></a></li>';
+                $action .= '</ul>';
 
                 return $action;
             })

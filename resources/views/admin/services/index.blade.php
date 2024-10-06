@@ -17,9 +17,9 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
+                                    <th>{{ __('Title') }}</th>
+                                    <th>{{ __('Category') }}</th>
+                                    <th>{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                         </table>
@@ -42,9 +42,9 @@
                 ajax: "{{ route('services.dataTable') }}",
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'name', name: 'name' },
-                    { data: 'email', name: 'email' },
-                    { data: 'action', name: 'action' },
+                { data: 'title', name: 'title' },
+                { data: 'category_name', name: 'category_name' }, 
+                { data: 'action', searchable: false, orderable: false }
                 ],
             });
         });

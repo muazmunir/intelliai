@@ -21,8 +21,6 @@ class ServiceRequest extends FormRequest
      */
     public function rules(): array
     {
-        $serviceId = $this->route('service') ? $this->route('service')->id : null;
-
         return [
             'category_id' => ['required', 'exists:service_categories,id'],
             'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],

@@ -40,7 +40,7 @@ class ServiceController extends Controller
         return view('admin.services.form', compact('pageTitle', 'categories'));
     }
 
-    public function store(ServiceRequest $request): RedirectResponse
+    public function store(ServiceRequest $request)
     {
         $this->serviceRepository->saveService($request);
 
@@ -52,9 +52,13 @@ class ServiceController extends Controller
 
     public function edit($id): View
     {
-        $categories = '';
+        $pageTitle = 'Edit Servicer';
 
-        return view('admin.services.edit', compact('service', 'categories'));
+        $service = $this->serviceRepository->getService($id);
+
+        $categories = ServiceCategory::all();
+
+        return view('admin.services.form', compact('pageTitle', 'service', 'categories'));
     }
 
     public function update(ServiceRequest $request, $id): RedirectResponse
