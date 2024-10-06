@@ -42,7 +42,6 @@ class ServiceCategoryRepository implements ServiceCategoryInterface
 
     public function saveServiceCategory($request)
     {
-        dd($request->all());
         $this->serviceCategory->create($request->all());
     }
 
