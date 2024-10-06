@@ -8,7 +8,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header bg-primary pt-2 pb-2 d-flex justify-content-between align-items-center">
-                    <h4 class="text-white mb-0">Users</h4>
+                    <h4 class="text-white mb-0">{{ $pageTitle }}</h4>
                     <a href="{{ route('users.create') }}" class="text-white"><i class="icofont icofont-ui-add"></i> Add New</a>
                 </div>
                 <div class="card-body">
