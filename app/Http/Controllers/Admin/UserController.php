@@ -56,7 +56,7 @@ class UserController extends Controller
 
     public function edit($id): View
     {
-        $pageTitle = 'Add user';
+        $pageTitle = 'Edit user';
 
         $user = $this->userRepository->getUser($id);
 
