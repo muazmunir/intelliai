@@ -11,7 +11,7 @@ class ServiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,12 +27,6 @@ class ServiceRequest extends FormRequest
             'category_id' => ['required', 'exists:service_categories,id'],
             'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'title' => ['required', 'string', 'max:255'],
-            'slug' => [
-                'required',
-                'string',
-                'max:255',
-                'unique:services,slug,'.$serviceId,
-            ],
             'short_description' => ['required', 'string', 'max:500'],
             'long_description' => ['required', 'string'],
             'is_featured' => ['nullable', 'boolean'],
@@ -47,8 +41,6 @@ class ServiceRequest extends FormRequest
             'icon.image' => 'The icon must be an image.',
             'icon.mimes' => 'The icon must be a file of type: jpeg, png, jpg, gif.',
             'title.required' => 'The title is required.',
-            'slug.required' => 'The slug is required.',
-            'slug.unique' => 'The slug must be unique.',
             'short_description.required' => 'The short description is required.',
             'long_description.required' => 'The long description is required.',
         ];
