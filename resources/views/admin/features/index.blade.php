@@ -24,7 +24,6 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>{{ __('Title') }}</th>
-                                    <th>{{ __('Category') }}</th>
                                     <th>{{ __('Action') }}</th>
                                 </tr>
                             </thead>
@@ -45,11 +44,10 @@
             $("#user_datatable").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('services.dataTable') }}",
+                ajax: "{{ route('features.dataTable') }}",
                 columns: [
                     { data: 'id', name: 'id' },
                 { data: 'title', name: 'title' },
-                { data: 'category_name', name: 'category_name' }, 
                 { data: 'action', searchable: false, orderable: false }
                 ],
             });

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\FeautreInterface;
+use App\Models\Feature;
 use Yajra\Datatables\Datatables;
 
 class FeatureRepository implements FeautreInterface
@@ -13,7 +14,8 @@ class FeatureRepository implements FeautreInterface
 
     public function __construct()
     {
-        //
+        $this->feature = new Feature();
+        $this->datatables = new Datatables;
     }
 
     public function getDataTable()
@@ -37,5 +39,12 @@ class FeatureRepository implements FeautreInterface
             })
             ->rawColumns(['action'])
             ->toJson();
+    }
+
+    public function saveFeature($request)
+    {
+        $input = $request->all();
+
+        $this->feature->create($input);
     }
 }

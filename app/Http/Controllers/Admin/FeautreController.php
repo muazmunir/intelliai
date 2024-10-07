@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FeatureRequest;
 use App\Interfaces\FeautreInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -33,5 +34,15 @@ class FeautreController extends Controller
         $pageTitle = 'Add user';
 
         return view('admin.features.form', compact('pageTitle'));
+    }
+
+    public function store(FeatureRequest $request)
+    {
+        $this->featureRepository->saveFeature($request);
+
+        return redirect()->route('features.index')->with([
+            'message' => 'Feature Created Successfully',
+            'alert-type' => 'success',
+        ]);
     }
 }
