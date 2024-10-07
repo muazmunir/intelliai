@@ -9,4 +9,6 @@ interface UserInterface
     public function saveUser($request);
 
     public function getUser($user_id);
+
+    public function updateUser($request, $id);
 }

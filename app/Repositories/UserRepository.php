@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\UserInterface;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Yajra\Datatables\Datatables;
 
@@ -15,11 +16,14 @@ class UserRepository implements UserInterface
 
     private $hash;
 
+    private $arr;
+
     public function __construct()
     {
         $this->user = new User;
         $this->datatables = new Datatables;
         $this->hash = new Hash;
+        $this->arr = new Arr;
     }
 
     public function getDataTable()
@@ -69,5 +73,20 @@ class UserRepository implements UserInterface
     public function getUser($user_id)
     {
         return $this->user->find($user_id);
+    }
+
+    public function updateUser($request, $id)
+    {
+        $input = $request->all();
+        
+        if (! empty($input['password'])) {
+            $input['password'] = $this->hash::make($input['password']);
+        } else {
+            $input = $this->arr->except($input, ['password']);
+        }
+
+        $this->user->find($id)->update($input);
+
+        return $this->user->find($id);
     }
 }

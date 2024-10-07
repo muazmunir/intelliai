@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'username' => [
-                'required',
+                'nullable',
                 'string',
                 'max:255',
                 Rule::unique('users', 'username')->ignore($userId), // Ignore username for the current user in update

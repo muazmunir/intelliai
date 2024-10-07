@@ -306,7 +306,7 @@
                 </li> -->
                 <li class="profile-nav onhover-dropdown">
                     <div class="media profile-media">
-                        <img class="b-r-10" src="/backend/assets/images/dashboard/profile.png" alt="">
+                        <!-- <img class="b-r-10" src="/backend/assets/images/dashboard/profile.png" alt=""> -->
                         <div class="media-body d-xxl-block d-none box-col-none">
                             <div class="d-flex align-items-center gap-2"> <span>{{ auth()->user()->full_name }} </span><i class="middle fa fa-angle-down"> </i></div>
                             <p class="mb-0 font-roboto">Admin</p>
@@ -314,8 +314,7 @@
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
                         <li><a href="#"><i data-feather="user"></i><span>My Profile</span></a></li>
-                        <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                        <li> <a href="#"> <i data-feather="settings"></i><span>Settings</span></a></li>
+                        <!-- <li> <a href="#"> <i data-feather="settings"></i><span>Settings</span></a></li> -->
                         <li>
                             <a href="javascript:void(0);" class="btn btn-pill btn-outline-primary btn-sm" 
                               onclick="document.getElementById('logout-form').submit();">Log Out</a>

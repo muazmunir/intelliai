@@ -66,4 +66,14 @@ class UserController extends Controller
 
         return view('admin.users.form', compact('pageTitle', 'user', 'roles', 'userRole'));
     }
+
+    public function update(UserRequest $request, $id): RedirectResponse
+    {
+        $this->userRepository->updateUser($request, $id);
+        
+        return redirect()->back()->with([
+            'message' => 'User Updated Successfully',
+            'alert-type' => 'success',
+        ]);
+    }
 }

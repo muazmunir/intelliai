@@ -12,6 +12,12 @@
                     <a href="{{ route('users.create') }}" class="text-white"><i class="icofont icofont-ui-add"></i> Add New</a>
                 </div>
                 <div class="card-body">
+                @if (session('success') || session('message'))
+    <div class="alert alert-{{ session('alert-type', 'success') }} alert-dismissible fade show" role="alert">
+        {{ session('success') ?? session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
                     <div class="table-responsive custom-scrollbar">
                         <table class="display" id="user_datatable">
                             <thead>

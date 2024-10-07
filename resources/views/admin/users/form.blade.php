@@ -9,6 +9,13 @@
                     <h4>{{ $pageTitle }}</h4>
                 </div>
                 <div class="card-body">
+                @if (session('success') || session('message'))
+    <div class="alert alert-{{ session('alert-type', 'success') }} alert-dismissible fade show" role="alert">
+        {{ session('success') ?? session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
                     <form class="row g-3" method="POST" action="{{ $user ? route('users.update', $user->id) : route('users.store') }}">
                         @csrf
                         @if($user)
@@ -83,30 +90,6 @@
                                 autocomplete="new-password"
                             >
                             @error('password_confirmation')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label" for="type">Type</label>
-                            <select name="type" class="form-select" id="userType">
-                                <option value="0" {{ old('type', $user ? $user->type : 0) == 0 ? 'selected' : '' }}>User</option>
-                                <option value="1" {{ old('type', $user ? $user->type : 0) == 1 ? 'selected' : '' }}>Admin</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label" for="password_confirmation">Assign Roles</label>
-                            <select class="form-select @error('roles') is-invalid @enderror" name="roles[]" id="userRole">
-                                <option value="" selected disabled>Choose...</option>
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->name }}" 
-                                        {{ $user && $user->roles->contains('name', $role->name) ? 'selected' : '' }}>
-                                        {{ ucfirst($role->name) }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('roles')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

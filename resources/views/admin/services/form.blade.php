@@ -11,6 +11,12 @@
                     <h4 class="text-white mb-0">{{ isset($service) ? 'Edit Service' : 'Create Service' }}</h4>
                 </div>
                 <div class="card-body">
+                @if (session('success') || session('message'))
+    <div class="alert alert-{{ session('alert-type', 'success') }} alert-dismissible fade show" role="alert">
+        {{ session('success') ?? session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
                     <!-- Display Validation Errors -->
                     @if ($errors->any())
                         <div class="alert alert-danger">
