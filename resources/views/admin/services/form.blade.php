@@ -11,12 +11,12 @@
                     <h4 class="text-white mb-0">{{ isset($service) ? 'Edit Service' : 'Create Service' }}</h4>
                 </div>
                 <div class="card-body">
-                @if (session('success') || session('message'))
-    <div class="alert alert-{{ session('alert-type', 'success') }} alert-dismissible fade show" role="alert">
-        {{ session('success') ?? session('message') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+                    @if (session('success') || session('message'))
+                        <div class="alert alert-{{ session('alert-type', 'success') }} alert-dismissible fade show" role="alert">
+                            {{ session('success') ?? session('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <!-- Display Validation Errors -->
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -39,6 +39,7 @@
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Category</label>
                             <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror" required>
+                                <option value="" selected disabled>Select Category</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}" {{ (old('category_id') ?? ($service->category_id ?? '')) == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
@@ -58,6 +59,20 @@
                             @error('title')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
+                        </div>
+
+                        <!-- Icon Upload -->
+                        <div class="mb-3">
+                            <label for="icon" class="form-label">Service Icon</label>
+                            <input type="file" name="icon" id="icon" class="form-control @error('icon') is-invalid @enderror" accept="image/*">
+                            @error('icon')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+
+                            <!-- Preview Image -->
+                            <div class="mt-2">
+                                <img id="icon-preview" src="{{ isset($service) ? $service->icon_url : 'https://via.placeholder.com/400x600.png/?text=No+Image' }}" alt="Icon Preview" class="img-fluid" style="max-width: 200px; display: {{ isset($service) ? 'block' : 'none' }};">
+                            </div>
                         </div>
 
                         <!-- Short Description -->
@@ -99,3 +114,24 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    document.getElementById('icon').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('icon-preview');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // Show the preview
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = 'https://via.placeholder.com/400x600.png/?text=No+Image';
+            preview.style.display = 'none'; // Hide the preview if no file is selected
+        }
+    });
+</script>
+@endpush

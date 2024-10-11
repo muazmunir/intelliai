@@ -5,21 +5,83 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\ImageManager;
 
 function uploadImage($file, $height, $width, $folder)
 {
-    $image_name = Str::random(10).'.'.$file->getClientOriginalExtension();
-    $path = public_path("uploads/{$folder}/{$image_name}");
-    $ImageManager = new ImageManager(new Driver);
-    $thumbImage = $ImageManager->read($path);
-    $thumbImage->cover($height, $width);
-    $thumbImage->save($path);
-    // Image::make($file)->resize($height, $width)->save($path);
+    $extension = $file->getClientOriginalExtension();
 
-    // return $image_name;
+    // Generate a unique image name using the current timestamp
+    $imageName = time() . '.' . $extension;
+
+    // Define the destination path
+    $destinationPath = public_path('uploads/' . $folder);
+
+    // Create the directory if it doesn't exist
+    if (!file_exists($destinationPath)) {
+        mkdir($destinationPath, 0777, true);
+    }
+
+    // Get the real path of the file
+    $imagePath = $file->getRealPath();
+
+    // Load the image based on its type
+    switch (strtolower($extension)) {
+        case 'jpeg':
+        case 'jpg':
+            $image = imagecreatefromjpeg($imagePath);
+            break;
+        case 'png':
+            $image = imagecreatefrompng($imagePath);
+            break;
+        case 'gif':
+            $image = imagecreatefromgif($imagePath);
+            break;
+        default:
+            return null; // Unsupported image type
+    }
+
+    // Get the original image dimensions
+    $originalWidth = imagesx($image);
+    $originalHeight = imagesy($image);
+
+    // Calculate the aspect ratio
+    $aspectRatio = $originalWidth / $originalHeight;
+
+    // Resize the image to the given width and height, keeping the aspect ratio
+    if ($width / $height > $aspectRatio) {
+        $newWidth = $height * $aspectRatio;
+        $newHeight = $height;
+    } else {
+        $newHeight = $width / $aspectRatio;
+        $newWidth = $width;
+    }
+
+    // Create a blank canvas for the resized image
+    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+
+    // Resize the original image into the blank canvas
+    imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight);
+
+    // Save the resized image based on its type
+    switch (strtolower($extension)) {
+        case 'jpeg':
+        case 'jpg':
+            imagejpeg($resizedImage, $destinationPath . '/' . $imageName);
+            break;
+        case 'png':
+            imagepng($resizedImage, $destinationPath . '/' . $imageName);
+            break;
+        case 'gif':
+            imagegif($resizedImage, $destinationPath . '/' . $imageName);
+            break;
+    }
+
+    // Free up memory
+    imagedestroy($image);
+    imagedestroy($resizedImage);
+
+    // Return the image name
+    return $imageName;
 }
 
 function uploadFile($file, $folder)

@@ -1,0 +1,6 @@
+*
+!.gitignore
+
+# Except the weather_icons folder and its contents
+!weather_icons/
+!weather_icons/**

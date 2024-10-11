@@ -51,7 +51,7 @@ class ServiceRepository implements ServiceInterface
     public function saveService($request)
     {
         $input = $request->all();
-        // $this->processIcon($request, $input);
+        $this->processIcon($request, $input);
         $this->service->create($input);
     }
 
