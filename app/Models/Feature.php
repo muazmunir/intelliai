@@ -13,7 +13,7 @@ class Feature extends Model
         'title',
         'description',
         'list_items',
-        'image_path',
+        'image',
         'order',
     ];
 
@@ -31,5 +31,14 @@ class Feature extends Model
     public function setListItemsAttribute($value)
     {
         $this->attributes['list_items'] = json_encode($value);
+    }
+
+    public function getImagePathAttribute()
+    {
+        if (! empty($this->image)) {
+            return asset('uploads/features/'.$this->image);
+        }
+
+        return 'https://via.placeholder.com/400x600.png/?text=400x600';
     }
 }

@@ -21,13 +21,15 @@ class FeatureRequest extends FormRequest
      */
     public function rules(): array
     {
+        $featureId = $this->route('feature') ? $this->route('feature') : null; // Get the feature ID if it exists
+
         $rules = [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional image validation
             'icon' => 'nullable|string|max:100', // Optional icon validation
             'items' => 'nullable|array',
-            'items.*' => 'nullable|string|max:255'
+            'items.*' => 'nullable|string|max:255',
         ];
 
         // If the request method is POST (creating a new feature)
@@ -37,7 +39,7 @@ class FeatureRequest extends FormRequest
 
         // If the request method is PUT/PATCH (editing an existing feature)
         if ($this->isMethod('put') || $this->isMethod('patch')) {
-            $rules['title'] = 'required|max:255|unique:features,title,' . $this->route('feature')->id; // Unique title but ignore current feature
+            $rules['title'] = 'required|max:255|unique:features,title,' . $featureId; // Unique title but ignore current feature
         }
 
         return $rules;

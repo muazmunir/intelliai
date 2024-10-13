@@ -31,7 +31,7 @@ class FeautreController extends Controller
 
     public function create(): View
     {
-        $pageTitle = 'Add user';
+        $pageTitle = 'Add Feature';
 
         return view('admin.features.form', compact('pageTitle'));
     }
@@ -42,6 +42,24 @@ class FeautreController extends Controller
 
         return redirect()->route('features.index')->with([
             'message' => 'Feature Created Successfully',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    public function edit($id): View
+    {
+        $feature = $this->featureRepository->getFeature($id);  // Retrieve the feature by ID
+        $pageTitle = 'Edit Feature';
+
+        return view('admin.features.form', compact('pageTitle', 'feature'));
+    }
+
+    public function update(FeatureRequest $request, $id)
+    {
+        $this->featureRepository->updateFeature($request, $id);
+
+        return redirect()->route('features.index')->with([
+            'message' => 'Feature Updated Successfully',
             'alert-type' => 'success',
         ]);
     }

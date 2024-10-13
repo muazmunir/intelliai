@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->text('list_items')->nullable(); // You can store list items as JSON or text
-            $table->string('image_path')->nullable(); // For storing the image path
+            $table->string('image')->nullable(); // For storing the image path
             $table->integer('order')->default(0);
             $table->timestamps();
         });
