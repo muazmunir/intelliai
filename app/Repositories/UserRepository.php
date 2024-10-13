@@ -89,4 +89,9 @@ class UserRepository implements UserInterface
 
         return $this->user->find($id);
     }
+
+    public function getUsers()
+    {
+        return $this->user->all();
+    }
 }

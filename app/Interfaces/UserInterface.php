@@ -11,4 +11,6 @@ interface UserInterface
     public function getUser($user_id);
 
     public function updateUser($request, $id);
+
+    public function getUsers();
 }

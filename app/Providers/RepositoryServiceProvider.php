@@ -7,12 +7,14 @@ use App\Interfaces\RoleInterface;
 use App\Interfaces\ServiceCategoryInterface;
 use App\Interfaces\ServiceInterface;
 use App\Interfaces\SettingInterface;
+use App\Interfaces\TestimonialInterface;
 use App\Interfaces\UserInterface;
 use App\Repositories\FeatureRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\ServiceCategoryRepository;
 use App\Repositories\ServiceRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\TestimonialRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +28,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ServiceCategoryInterface::class, ServiceCategoryRepository::class);
         $this->app->bind(ServiceInterface::class, ServiceRepository::class);
         $this->app->bind(FeautreInterface::class, FeatureRepository::class);
+        $this->app->bind(TestimonialInterface::class, TestimonialRepository::class);
     }
 }

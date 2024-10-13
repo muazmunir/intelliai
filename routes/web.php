@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\FeautreController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -56,4 +57,5 @@ Route::middleware(['auth', 'verified', 'user-access:admin'])->prefix('admin')->g
     Route::CustomResource('service-categories', ServiceCategoryController::class);
     Route::CustomResource('services', ServiceController::class);
     Route::CustomResource('features', FeautreController::class);
+    Route::CustomResource('testimonials', TestimonialController::class);
 });
