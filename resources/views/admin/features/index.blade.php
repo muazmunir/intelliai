@@ -19,7 +19,7 @@
     </div>
 @endif
                     <div class="table-responsive custom-scrollbar">
-                        <table class="display" id="user_datatable">
+                        <table class="display" id="feature_datatable">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -39,68 +39,60 @@
 @push('scripts')
 
 <script>
-    (function ($) {
-        $(document).ready(function () {
-            $("#user_datatable").DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('features.dataTable') }}",
-                columns: [
-                    { data: 'id', name: 'id' },
-                { data: 'title', name: 'title' },
-                { data: 'action', searchable: false, orderable: false }
-                ],
-            });
+    $(document).ready(function () {
+        $("#feature_datatable").DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('features.dataTable') }}",
+            columns: [
+                { data: 'id', name: 'id' },
+            { data: 'title', name: 'title' },
+            { data: 'action', searchable: false, orderable: false }
+            ],
         });
         
 
-        $('.action .delete a').on('click', function(event) {
-        event.preventDefault(); // Prevent the default anchor behavior
+        $(document).on('click', '#deleteFeature', function() {
+    var featureId = $(this).data('id'); // Get the feature ID from the data-id attribute
 
-        const userId = $(this).closest('ul.action').data('user-id'); // Get the user ID from data attribute
-        const deleteUrl = `/users/${userId}`; // Set the URL for deletion
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Make an AJAX call to delete the user
-                $.ajax({
-                    url: deleteUrl,
-                    type: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    success: function(response) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your user has been deleted.',
-                            'success'
-                        ).then(() => {
-                            // Optionally refresh the page or remove the deleted user from the table
-                            location.reload(); // Refresh the page
-                        });
-                    },
-                    error: function(xhr) {
-                        Swal.fire(
-                            'Error!',
-                            'There was an error deleting the user.',
-                            'error'
-                        );
-                    }
-                });
-            }
-        });
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this feature!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: '/admin/features/' + featureId, // Use the delete route with the feature ID
+                type: 'DELETE',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content') // CSRF token
+                },
+                success: function(response) {
+                    swal(response.message, {
+                        icon: "success",
+                    });
+                    // Reload DataTable to reflect changes
+                    $('#feature_datatable').DataTable().ajax.reload();
+                },
+                error: function(xhr) {
+                    swal("Error deleting feature!", {
+                        icon: "error",
+                    });
+                }
+            });
+        }
     });
+});
 
 
-    })(jQuery);
+    });
+        
+
+ 
+ 
 </script>
 
 @endpush

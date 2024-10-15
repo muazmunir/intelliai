@@ -63,4 +63,24 @@ class FeautreController extends Controller
             'alert-type' => 'success',
         ]);
     }
+
+    public function destroy($id)
+    {
+        try {
+            // Call repository method to delete the feature
+            $this->featureRepository->deleteFeature($id);
+
+            return response()->json([
+                'message' => 'Feature deleted successfully',
+                'status' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error deleting feature',
+                'status' => 'error',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 }

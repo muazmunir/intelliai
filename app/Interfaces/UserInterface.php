@@ -15,7 +15,4 @@ interface UserInterface
     public function getUsers();
 
     public function deleteUser($id);
-
-    public function deleteServiceCategory($id);
-
 }

@@ -11,4 +11,6 @@ interface FeautreInterface
     public function getFeature($id);
 
     public function updateFeature($request, $id);
+
+    public function deleteFeature($id);
 }

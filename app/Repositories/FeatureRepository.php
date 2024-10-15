@@ -23,10 +23,10 @@ class FeatureRepository implements FeautreInterface
         $services = $this->feature->query();
 
         return $this->datatables->of($services)
-            ->addColumn('action', function ($user) {
+            ->addColumn('action', function ($feature) {
                 $action = '<ul class="action">';
-                $action .= '<li class="edit"><a href="'.route('features.edit', $user->id).'"><i class="icon-pencil-alt"></i></a></li>';
-                $action .= '<li class="delete"><a href="#"><i class="icon-trash"></i></a></li>';
+                $action .= '<li class="edit"><a href="'.route('features.edit', $feature->id).'"><i class="icon-pencil-alt"></i></a></li>';
+                $action .= '<li class="delete"><a href="javascript:void(0);" data-id="'.$feature->id.'" id="deleteFeature"><i class="icon-trash"></i></a></li>';
                 $action .= '</ul>';
 
                 return $action;
@@ -77,5 +77,9 @@ class FeatureRepository implements FeautreInterface
         }
     }
 
-
+    public function deleteFeature($id)
+    {
+        $feature = $this->feature->find($id);
+        $feature->delete();
+    }
 }
