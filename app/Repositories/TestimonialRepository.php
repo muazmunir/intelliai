@@ -26,7 +26,7 @@ class TestimonialRepository implements TestimonialInterface
             ->addColumn('action', function ($testimonial) {
                 $action = '<ul class="action">';
                 $action .= '<li class="edit"><a href="'.route('testimonials.edit', $testimonial->id).'"><i class="icon-pencil-alt"></i></a></li>';
-                $action .= '<li class="delete"><a href="#"><i class="icon-trash"></i></a></li>';
+                $action .= '<li class="delete"><a href="javascript:void(0);" data-id="'.$testimonial->id.'" id="deleteTestimonial"><i class="icon-trash"></i></a></li>';
                 $action .= '</ul>';
 
                 return $action;
@@ -61,4 +61,13 @@ class TestimonialRepository implements TestimonialInterface
         $input = $request->all();
         $testimonial->update($input);
     }
+
+    public function deleteTestimonial($id)
+    {
+        // Find the testimonial by ID and delete it
+        $testimonial = $this->testimonial->findOrFail($id); // Adjust according to your model
+
+        $testimonial->delete();
+    }
+
 }

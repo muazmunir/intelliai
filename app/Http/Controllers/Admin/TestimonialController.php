@@ -72,4 +72,25 @@ class TestimonialController extends Controller
             'alert-type' => 'success',
         ]);
     }
+
+    public function destroy($id)
+    {
+        try {
+            // Call repository method to delete the testimonial
+            $this->testimonialRepository->deleteTestimonial($id);
+
+            return response()->json([
+                'message' => 'Testimonial deleted successfully',
+                'status' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error deleting testimonial',
+                'status' => 'error',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    
 }

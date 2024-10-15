@@ -11,4 +11,6 @@ interface TestimonialInterface
     public function getTestimonial($id);
 
     public function updateTestimonial($request, $id);
+
+    public function deleteTestimonial($id);
 }
