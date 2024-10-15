@@ -30,10 +30,10 @@ class ServiceRepository implements ServiceInterface
             ->addColumn('category_name', function ($services) {
                 return $services->category->name;
             })
-            ->addColumn('action', function ($user) {
+            ->addColumn('action', function ($service) {
                 $action = '<ul class="action">';
-                $action .= '<li class="edit"><a href="'.route('services.edit', $user->id).'"><i class="icon-pencil-alt"></i></a></li>';
-                $action .= '<li class="delete"><a href="#"><i class="icon-trash"></i></a></li>';
+                $action .= '<li class="edit"><a href="'.route('services.edit', $service->id).'"><i class="icon-pencil-alt"></i></a></li>';
+                $action .= '<li class="delete"><a href="javascript:void(0);" data-id="'.$service->id.'" class="deleteService"><i class="icon-trash"></i></a></li>';
                 $action .= '</ul>';
 
                 return $action;

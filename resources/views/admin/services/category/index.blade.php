@@ -80,69 +80,43 @@
             ],
             order: [[1, 'asc']],
         });
-    });
-</script>
- <!-- Scripts -->
- 
-   
-<script>
-    var categoryId;
-    $(document).on('click', '.edit-category-button', function() {
-        categoryId = $(this).data('category-id');
-        $.ajax({
-            url: '/admin/service-categories/' + categoryId + '/edit',
-            method: 'GET',
-            success: function(response) {
-                $('#edit-category-form input[name="name"]').val(response.category.name);
-                $('#editCategoryModal').modal('show');
-            }
-        });
-    });
 
-    $('#edit-category-form').submit(function(event) {
-        event.preventDefault();
-        var formData = $(this).serialize();        
-        $.ajax({
-            url: '/admin/service-categories/' + categoryId,
-            method: 'PUT',
-            data: formData,
-            success: function(response) {
-                $("#category_datatable").DataTable().ajax.reload();
-                Swal.fire('Success', response.message, 'success');
-                $('#editCategoryModal').modal('hide');
-            },
-         });
+        $(document).on('click', '#deleteCategory', function(event) {
+            event.preventDefault();
+            var categoryId = $(this).data('id'); // Get the service category ID
+
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this category!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/admin/service-categories/' + categoryId, // Replace with your delete route
+                        type: 'DELETE',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content') // CSRF token
+                        },
+                        success: function(response) {
+                            swal(response.message, {
+                                icon: "success",
+                            });
+                            // Refresh the DataTable after deletion
+                            $('#category_datatable').DataTable().ajax.reload();
+                        },
+                        error: function(xhr) {
+                            swal("Error deleting category!", {
+                                icon: "error",
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
     });
 </script> 
-<script>
-    function confirmDelete(categoryId) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You will not be able to recover this category!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.delete(`/admin/service-categories/${categoryId}`)
-                    .then(response => {
-                        if (response.status === 200) {
-                            if (response.data.title && response.data.title === 'Error') {
-                                Swal.fire('Error', response.data.message, 'error');
-                            } else {
-                                Swal.fire('Success', response.data.message, 'success').then(() => {
-                                    $('#category_datatable').DataTable().ajax.reload();
-                                });
-                            }
-                        }
-                    })
-                    .catch(error => {
-                        Swal.fire('Error', 'An error occurred while deleting the category.', 'error');
-                    });
-            }
-        });
-    }
-</script>
- 
 @endpush

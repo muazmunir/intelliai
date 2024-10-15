@@ -20,7 +20,6 @@
     <script src="/backend/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <!-- <script src="/backend/assets/js/datatable/datatables/datatable.custom.js"></script> -->
     <script src="/backend/assets/js/sweet-alert/sweetalert.min.js"></script>
-    <script src="/backend/assets/js/sweet-alert/app.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="/backend/assets/js/script.js"></script>

@@ -52,6 +52,19 @@ class ServiceCategoryController extends Controller
 
     public function destroy($id): JsonResponse
     {
-        return $this->serviceCategoryRepository->deleteServiceCategory($id);
+        try {
+            $this->serviceCategoryRepository->deleteServiceCategory($id);
+
+            return response()->json([
+                'message' => 'Service Category deleted successfully',
+                'status' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error deleting Service Category',
+                'status' => 'error',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

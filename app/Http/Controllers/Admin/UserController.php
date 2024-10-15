@@ -76,4 +76,25 @@ class UserController extends Controller
             'alert-type' => 'success',
         ]);
     }
+
+    public function destroy($id): JsonResponse
+    {
+        try {
+            // Call the repository method to delete the user
+            $this->userRepository->deleteUser($id);
+
+            // Return success response
+            return response()->json([
+                'message' => 'User deleted successfully',
+                'status' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            // Return error response in case of exception
+            return response()->json([
+                'message' => 'Error deleting user',
+                'status' => 'error',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

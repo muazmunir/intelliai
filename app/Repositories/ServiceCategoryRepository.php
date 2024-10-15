@@ -20,25 +20,28 @@ class ServiceCategoryRepository implements ServiceCategoryInterface
 
     public function getDataTable()
     {
+        // Fetch the categories with necessary fields
         $categories = $this->serviceCategory->select('id', 'name')->get();
 
         return $this->datatables->of($categories)
-            ->addColumn('action', function ($user) {
+            ->addColumn('action', function ($category) {
+                // Create the action buttons (Edit and Delete) for each category
                 $action = '<ul class="action">';
-                $action .= '<li class="edit"><a href="#"><i class="icon-pencil-alt"></i></a></li>';
-                $action .= '<li class="delete"><a href="#"><i class="icon-trash"></i></a></li>';
+                $action .= '<li class="edit"><a href="' . route('service-categories.edit', $category->id) . '"><i class="icon-pencil-alt"></i></a></li>';
+                $action .= '<li class="delete"><a href="javascript:void(0);" data-id="' . $category->id . '" id="deleteCategory"><i class="icon-trash"></i></a></li>';
                 $action .= '</ul>';
 
                 return $action;
             })
-            ->editColumn('id', function () {
+            ->editColumn('id', function ($category) {
+                // Increment and display the ID as a sequential number
                 static $i = 0;
                 $i++;
 
                 return $i;
             })
-            ->rawColumns(['checkbox', 'action'])
-            ->toJson();
+            ->rawColumns(['action']) // Specify the raw columns
+            ->toJson(); // Return as JSON for DataTables
     }
 
     public function saveServiceCategory($request)
@@ -61,11 +64,6 @@ class ServiceCategoryRepository implements ServiceCategoryInterface
     public function deleteServiceCategory(int $id)
     {
         $serviceCategory = $this->serviceCategory->find($id);
-        if ($serviceCategory->services()->count() > 0) {
-            return jsonResponse(['title' => 'Error', 'message' => 'Cannot delete the category because it has associated experiences'], 403);
-        }
         $serviceCategory->delete();
-
-        return jsonResponse(['message' => 'service Category Deleted Successfully']);
-    }
+    }    
 }

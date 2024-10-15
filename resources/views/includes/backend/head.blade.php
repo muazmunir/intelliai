@@ -7,6 +7,8 @@
     <link rel="icon" href="/frontend/assets/img/new-logo.png" type="image/x-icon">
     <link rel="shortcut icon" href="/frontend/assets/img/new-logo.png" type="image/x-icon">
     <title>@yield('title', 'Dashboard') - {{ config('app.name') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">

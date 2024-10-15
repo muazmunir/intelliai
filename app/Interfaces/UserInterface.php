@@ -13,4 +13,9 @@ interface UserInterface
     public function updateUser($request, $id);
 
     public function getUsers();
+
+    public function deleteUser($id);
+
+    public function deleteServiceCategory($id);
+
 }

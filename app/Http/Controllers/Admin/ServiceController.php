@@ -73,6 +73,20 @@ class ServiceController extends Controller
 
     public function destroy($id): JsonResponse
     {
-        return $this->serviceRepository->deleteService($id);
+        try {
+            // Call repository method to delete service
+            $this->serviceRepository->deleteService($id);
+
+            return response()->json([
+                'message' => 'Service deleted successfully',
+                'status' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error deleting service',
+                'status' => 'error',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

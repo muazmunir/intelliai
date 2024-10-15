@@ -13,11 +13,11 @@
                 </div>
                 <div class="card-body">
                 @if (session('success') || session('message'))
-    <div class="alert alert-{{ session('alert-type', 'success') }} alert-dismissible fade show" role="alert">
-        {{ session('success') ?? session('message') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+                    <div class="alert alert-{{ session('alert-type', 'success') }} alert-dismissible fade show" role="alert">
+                        {{ session('success') ?? session('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                     <div class="table-responsive custom-scrollbar">
                         <table class="display" id="user_datatable">
                             <thead>
@@ -40,69 +40,53 @@
 @push('scripts')
 
 <script>
-    (function ($) {
-        $(document).ready(function () {
-            $("#user_datatable").DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('users.dataTable') }}",
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'name', name: 'name' },
-                    { data: 'email', name: 'email' },
-                    { data: 'action', name: 'action' },
-                ],
+    $(document).ready(function () {
+        var table = $("#user_datatable").DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('users.dataTable') }}",
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'name', name: 'name' },
+                { data: 'email', name: 'email' },
+                { data: 'action', name: 'action' },
+            ],
+        });
+        $(document).on('click', '#deleteUser', function(event) {
+            event.preventDefault();
+            var userId = $(this).data('id'); // Get the user ID
+
+            swal({
+                title: "Are you sure?",
+                text: "This action cannot be undone!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/admin/users/' + userId, // Updated route to match your DELETE route
+                        method: 'DELETE',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content') // CSRF token
+                        },
+                        success: function(response) {
+                            swal(response.message, {
+                                icon: response.status,
+                            });
+                            table.ajax.reload();
+                        },
+                        error: function(xhr) {
+                            swal("Error deleting user!", {
+                                icon: "error",
+                            });
+                        }
+                    });
+                }
             });
         });
-        
-
-        $('.action .delete a').on('click', function(event) {
-        event.preventDefault(); // Prevent the default anchor behavior
-
-        const userId = $(this).closest('ul.action').data('user-id'); // Get the user ID from data attribute
-        const deleteUrl = `/users/${userId}`; // Set the URL for deletion
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Make an AJAX call to delete the user
-                $.ajax({
-                    url: deleteUrl,
-                    type: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    success: function(response) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your user has been deleted.',
-                            'success'
-                        ).then(() => {
-                            // Optionally refresh the page or remove the deleted user from the table
-                            location.reload(); // Refresh the page
-                        });
-                    },
-                    error: function(xhr) {
-                        Swal.fire(
-                            'Error!',
-                            'There was an error deleting the user.',
-                            'error'
-                        );
-                    }
-                });
-            }
-        });
     });
-
-
-    })(jQuery);
 </script>
 
 @endpush
