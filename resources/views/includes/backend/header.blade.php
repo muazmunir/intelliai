@@ -313,7 +313,7 @@
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
-                        <li><a href="#"><i data-feather="user"></i><span>My Profile</span></a></li>
+                        <li><a href="{{ route('profile.edit') }}"><i data-feather="user"></i><span>My Profile</span></a></li>
                         <!-- <li> <a href="#"> <i data-feather="settings"></i><span>Settings</span></a></li> -->
                         <li>
                             <a href="javascript:void(0);" class="btn btn-pill btn-outline-primary btn-sm" 
