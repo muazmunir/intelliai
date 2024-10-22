@@ -27,7 +27,7 @@ class ServiceCategoryRepository implements ServiceCategoryInterface
             ->addColumn('action', function ($category) {
                 // Create the action buttons (Edit and Delete) for each category
                 $action = '<ul class="action">';
-                $action .= '<li class="edit"><a href="' . route('service-categories.edit', $category->id) . '"><i class="icon-pencil-alt"></i></a></li>';
+                // $action .= '<li class="edit"><a href="' . route('service-categories.edit', $category->id) . '"><i class="icon-pencil-alt"></i></a></li>';
                 $action .= '<li class="delete"><a href="javascript:void(0);" data-id="' . $category->id . '" id="deleteCategory"><i class="icon-trash"></i></a></li>';
                 $action .= '</ul>';
 
