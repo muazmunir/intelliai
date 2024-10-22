@@ -36,7 +36,7 @@
                                 <label for="meta_keywords">Meta Keywords: <span class="text-primary">Separate Every Keyword by Using (,) Symbol</span></label>
                                 <textarea class="form-control" name="meta_keywords" rows="3" id="meta_keywords">{{ setting()->meta_keywords }}</textarea>
                             </div>
-                            <div class="form-group col-md-6 mb-3">
+                            <!-- <div class="form-group col-md-6 mb-3">
                                 <img src="{{ setting()->logo_url }}" class="image-preview" height="80" width="160">
                                 <div class="clearfix"></div>
                                 <label for="logo">Site Logo: <span class="text-primary">Best Resolution Height- 80 PX, Width- Any PX</span></label>
@@ -47,8 +47,8 @@
                                 <div class="clearfix"></div>
                                 <label for="favicon">Site Favicon: <span class="text-primary">Best Resolution Height- 64 PX, Width- 64 PX</span></label>
                                 <input type="file" class="form-control image-input" name="favicon" id="favicon">
-                            </div>
-                            <div class="form-group col-md-4 mb-3">
+                            </div> -->
+                            <!-- <div class="form-group col-md-4 mb-3">
                                 <label for="time_zone">Time Zone <span class="text-primary">*</span></label>
                                 <select class="form-control select2" name="timezone_id" >
                                     <option value="">-- Select One --</option>
@@ -65,8 +65,8 @@
                                     <option value="{{ $currency->id }}" <?php if($currency->id==setting()->currency_id){ echo 'selected'; } ?>>{{ $currency->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group col-md-4 mb-3">
+                            </div> -->
+                            <!-- <div class="form-group col-md-4 mb-3">
                                 <label for="currency">Country <span class="text-primary">*</span></label>
                                 <select class="form-control select2" name="country_id" id="country_id" >
                                     <option value="">-- Select One --</option>
@@ -74,7 +74,7 @@
                                     <option value="{{ $country->id }}" <?php if($country->id==setting()->country_id){ echo 'selected'; } ?>>{{ $country->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> -->
                             
                             <div class="form-group col-md-4 mb-3">
                                 <label for="meta_title">Phone Number</label>
