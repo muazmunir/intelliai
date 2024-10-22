@@ -74,7 +74,7 @@
                             <a href="/admin/setting">General</a>
                         </li>
                         <li>
-                            <a href="/admin/setting/create">Email</a>
+                            <!-- <a href="/admin/setting/create">Email</a> -->
                         </li>
                     </ul>
                 </li>
