@@ -7,6 +7,12 @@
 
     <div class="row">
         <div class="col-12">
+        @if (session('success') || session('message'))
+    <div class="alert alert-{{ session('alert-type', 'success') }} alert-dismissible fade show" role="alert">
+        {{ session('success') ?? session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
             <form method="post" action="{{ route('setting.update') }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
