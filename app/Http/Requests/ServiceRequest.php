@@ -23,7 +23,7 @@ class ServiceRequest extends FormRequest
     {
         return [
             'category_id' => ['required', 'exists:service_categories,id'],
-            'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'icon' => ['nullable', 'image', 'max:2048'],
             'title' => ['required', 'string', 'max:255'],
             'short_description' => ['required', 'string', 'max:500'],
             'long_description' => ['required', 'string'],

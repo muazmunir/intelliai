@@ -26,7 +26,7 @@ class FeatureRequest extends FormRequest
         $rules = [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional image validation
+            'image' => 'nullable|image', // Optional image validation
             'icon' => 'nullable|string|max:100', // Optional icon validation
             'items' => 'nullable|array',
             'items.*' => 'nullable|string|max:255',

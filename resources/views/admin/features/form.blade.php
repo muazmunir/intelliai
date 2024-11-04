@@ -19,6 +19,16 @@
                         </div>
                     @endif
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    
                     <form action="{{ isset($feature) ? route('features.update', $feature->id) : route('features.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if (isset($feature))

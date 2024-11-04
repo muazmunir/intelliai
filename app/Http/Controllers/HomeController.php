@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feature;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        $features = Feature::all();
+
+        return view('frontend.index', compact('features'));
     }
 
     public function about()

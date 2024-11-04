@@ -58,6 +58,7 @@ class FeatureRepository implements FeautreInterface
         $feature = $this->feature->find($id);
         $input = $request->all();
         $this->processImage($request, $input, $id);
+        dd($input);
         $feature->update($input);
     }
 
