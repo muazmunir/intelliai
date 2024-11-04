@@ -96,8 +96,8 @@
                         <!-- Featured Checkbox -->
                         <div class="form-check mb-3">
                             <input type="hidden" name="is_featured" value="0"> <!-- hidden input to handle unchecked state -->
-                            <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input" value="1"
-                                <?php echo ($isFeaturedChecked || (!isset($_POST['is_featured']) && $service['is_featured'])) ? 'checked' : ''; ?>>
+                            <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input" value="1" 
+                                {{ old('is_featured', $service->is_featured ?? 0) ? 'checked' : '' }}>
                             <label for="is_featured" class="form-check-label">Is Featured</label>
                         </div>
 
