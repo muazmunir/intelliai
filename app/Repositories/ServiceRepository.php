@@ -80,7 +80,7 @@ class ServiceRepository implements ServiceInterface
     {
         if ($request->hasFile('icon')) {
             $this->deleteIcon($id);
-            $input['icon'] = uploadImage($request->file('icon'), '400', '600', 'services');
+            $input['icon'] = uploadImage($request->file('icon'), '70', '70', 'services');
         }
     }
 
