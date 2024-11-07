@@ -79,21 +79,21 @@
 
     <div class="container">
 
-    <div class="row gy-4">
-    @foreach ($services as $service)
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item position-relative" style="background-color: {{ $service->color }};"> <!-- Example for dynamic color -->
-                <div class="icon">
-                    <img src="{{ $service->icon_url }}" alt="{{ $service->title }}" class="img-fluid">
-                </div>
-                <a href="{{ route('services.show', $service->id) }}" class="stretched-link">
-                    <h3>{{ $service->title }}</h3>
-                </a>
-                <p>{{ $service->short_description }}</p>
-            </div>
-        </div>
-    @endforeach
-</div>
+      <div class="row gy-4">
+          @foreach ($services as $service)
+              <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                  <div class="service-item position-relative">
+                      <div class="icon">
+                          <img src="{{ $service->icon_url }}" alt="{{ $service->title }}" class="img-fluid">
+                      </div>
+                      <a href="{{ route('services.show', $service->id) }}" class="stretched-link">
+                          <h3>{{ $service->title }}</h3>
+                      </a>
+                      <p>{{ $service->short_description }}</p>
+                  </div>
+              </div>
+          @endforeach
+      </div>
 
 
     </div>
