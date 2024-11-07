@@ -39,6 +39,6 @@ class Feature extends Model
             return asset('uploads/features/'.$this->image);
         }
 
-        return 'https://via.placeholder.com/400x600.png/?text=400x600';
+        return 'https://via.placeholder.com/400x500.png/?text=400x500';
     }
 }
