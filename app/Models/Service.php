@@ -30,6 +30,6 @@ class Service extends Model
             return asset('uploads/services/'.$this->icon);
         }
 
-        return 'https://via.placeholder.com/400x600.png/?text=400x600';
+        return 'https://via.placeholder.com/70x70.png/?text=70x70';
     }
 }
