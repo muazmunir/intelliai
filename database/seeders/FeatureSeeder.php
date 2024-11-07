@@ -18,35 +18,30 @@ class FeatureSeeder extends Seeder
                 'title' => 'AI-Powered Personalization',
                 'description' => 'Utilize AI to tailor SMS messages to individual customer preferences and behaviors, increasing engagement and conversion rates.',
                 'list_items' => ['Behavior analysis', 'Custom message templates', 'Targeted campaigns'],
-                'image' => 'ai_personalization.png',
                 'order' => 1,
             ],
             [
                 'title' => 'Automated Follow-Up Messages',
                 'description' => 'Automatically send follow-up messages to customers to ensure consistent engagement and improve response rates.',
                 'list_items' => ['Set intervals for follow-ups', 'Engage with potential leads', 'Boost conversion rates'],
-                'image' => 'automated_followups.png',
                 'order' => 2,
             ],
             [
                 'title' => 'Campaign Performance Analytics',
                 'description' => 'Get detailed analytics on campaign performance to understand engagement levels and optimize future strategies.',
                 'list_items' => ['Open rates', 'Click-through rates', 'Customer feedback analysis'],
-                'image' => 'analytics.png',
                 'order' => 3,
             ],
             [
                 'title' => 'A/B Testing',
                 'description' => 'Test different message formats and timings to determine what resonates best with your audience.',
                 'list_items' => ['Compare message variations', 'Optimize engagement', 'Data-driven decision-making'],
-                'image' => 'ab_testing.png',
                 'order' => 4,
             ],
             [
                 'title' => 'Geo-Targeting SMS Campaigns',
                 'description' => 'Send targeted messages based on customer locations to increase relevance and engagement.',
                 'list_items' => ['Location-based offers', 'Event notifications', 'Targeted advertising'],
-                'image' => 'geo_targeting.png',
                 'order' => 5,
             ],
         ];
@@ -56,7 +51,6 @@ class FeatureSeeder extends Seeder
                 'title' => $feature['title'],
                 'description' => $feature['description'],
                 'list_items' => $feature['list_items'],
-                'image' => $feature['image'],  // Ensure to place images in the public/uploads/features directory
                 'order' => $feature['order'],
             ]);
         }
