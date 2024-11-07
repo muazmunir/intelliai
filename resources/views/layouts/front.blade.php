@@ -33,6 +33,26 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style>
+    .service-item h3 {
+        min-height: 50px; /* Adjust height based on your needs */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .service-item p {
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /* Limits the text to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 5.4em; /* Adjust based on line height */
+    }
+</style>
 </head>
 
 <body class="index-page">
